@@ -1,4 +1,4 @@
-# context
+# context [![.github/workflows/ci.yml](https://github.com/threez/context.cr/actions/workflows/ci.yml/badge.svg)](https://github.com/threez/context.cr/actions/workflows/ci.yml) [![https://threez.github.io/context.cr/](https://badgen.net/badge/api/documentation/green)](https://threez.github.io/context.cr/)
 
 Coming from languages like golang you might miss the equivalent of a context providing
 library to help support your cross functional requirements. This library adds the 

@@ -47,7 +47,7 @@ class Fiber
 
   # fetch a context value using the passed symbol as key, if the key is not
   # known the context will be executed and its result will be returned
-  def fetch_value(key, &block : {Symbol} ->)
+  def fetch_value(key, &block)
     value_context.not_nil!.fetch(key, &block)
   end
 
