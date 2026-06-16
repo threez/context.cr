@@ -9,7 +9,7 @@ class Fiber
   # The values can be shadowed by calling `with_values` nested.
   def with_values(**kwargs, &)
     previous = value_context
-    new_metadata = previous.not_nil!.extend(kwargs) unless kwargs.empty?
+    new_metadata = previous.extend(kwargs) unless kwargs.empty?
     begin
       @value_context = new_metadata
       yield
@@ -24,7 +24,7 @@ class Fiber
   # The values can be shadowed by calling `with_values` nested.
   def with_empty_values(**kwargs, &)
     previous = value_context
-    new_metadata = Log::Metadata.empty.not_nil!.extend(kwargs) unless kwargs.empty?
+    new_metadata = Log::Metadata.empty.extend(kwargs) unless kwargs.empty?
     begin
       @value_context = new_metadata
       yield
@@ -48,23 +48,23 @@ class Fiber
   # fetch a context value using the passed symbol as key, if the key is not
   # known the context will be executed and its result will be returned
   def fetch_value(key, &block)
-    value_context.not_nil!.fetch(key, &block)
+    value_context.fetch(key, &block)
   end
 
   # iterates over all context values
   def each_value(&block : {Symbol, Log::Metadata::Value} ->)
-    value_context.not_nil!.each(&block)
+    value_context.each(&block)
   end
 
   # inspects all values and returns them as a string
   def inspect_values : String
     io = IO::Memory.new
-    value_context.not_nil!.to_s(io)
+    value_context.to_s(io)
     io.to_s
   end
 
   # inspects all values and writes them to the given `io`
   def inspect_values(io : IO) : Nil
-    value_context.not_nil!.to_s(io)
+    value_context.to_s(io)
   end
 end
