@@ -5,7 +5,7 @@ describe Fiber do
     f = Fiber.current
 
     f.inspect_values.should eq ""
-    f[:foo]?.should eq nil
+    f[:foo]?.should be_nil
   end
 
   it "failes to request an unknown context value" do
@@ -26,7 +26,7 @@ describe Fiber do
       f[:foo].should eq "123"
     end
 
-    f[:foo]?.should eq nil
+    f[:foo]?.should be_nil
   end
 
   it "can use a new empty context" do
@@ -36,13 +36,13 @@ describe Fiber do
       f[:foo].should eq "123"
       f.with_empty_values bar: "456" do
         f[:bar].should eq "456"
-        f[:foo]?.should eq nil
+        f[:foo]?.should be_nil
         f.inspect_values.should eq "bar: \"456\""
       end
       f[:foo].should eq "123"
     end
 
-    f[:foo]?.should eq nil
+    f[:foo]?.should be_nil
   end
 
   it "can iterate over the context values" do
